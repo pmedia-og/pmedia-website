@@ -30,7 +30,7 @@ const fill=new THREE.DirectionalLight(0xa9c6ff,1.1);fill.position.set(-6,-2,5);s
 /* helpers */
 let seed=11;const rnd=()=>{seed=(seed*16807)%2147483647;return(seed-1)/2147483646};
 const C=h=>new THREE.Color(h);
-const BLUE=0x1f5bff,BLUE2=0x5b8cff,SKY=0x8ccbff,INK=0x0a1433,WHITE=0xffffff;
+const BLUE=canvas.dataset.acc?parseInt(canvas.dataset.acc.slice(1),16):0x1f5bff,BLUE2=new THREE.Color(BLUE).lerp(new THREE.Color(0xffffff),.35).getHex(),SKY=0x8ccbff,INK=0x0a1433,WHITE=0xffffff;
 const cl=(x,a=0,b=1)=>Math.max(a,Math.min(b,x));
 function ctex(w,h,draw){const c=document.createElement('canvas');c.width=w;c.height=h;const g=c.getContext('2d');draw(g,w,h);const t=new THREE.CanvasTexture(c);t.colorSpace=THREE.SRGBColorSpace;t.anisotropy=4;t.userData.draw=()=>{g.clearRect(0,0,w,h);draw(g,w,h);t.needsUpdate=true};return t}
 const dotTex=ctex(64,64,g=>{const r=g.createRadialGradient(32,32,0,32,32,32);r.addColorStop(0,'rgba(255,255,255,1)');r.addColorStop(.55,'rgba(255,255,255,.9)');r.addColorStop(1,'rgba(255,255,255,0)');g.fillStyle=r;g.fillRect(0,0,64,64)});

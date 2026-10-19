@@ -65,7 +65,7 @@
   layoutRing();addEventListener('resize',layoutRing);
 
   if(!window.gsap)return;
-  doc.classList.add('js');gsap.ticker.lagSmoothing(0);
+  doc.classList.add('js');gsap.ticker.lagSmoothing(0);gsap.config({nullTargetWarn:false});
   if(window.ScrollTrigger)gsap.registerPlugin(ScrollTrigger);
 
   /* ---------- page transition ---------- */

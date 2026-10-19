@@ -1,0 +1,122 @@
+/* PMedia site — night theme: luminous blue sky background (assets/js/bg.js) with glass surfaces.
+   Loaded after site.css and sig.css; re-maps tokens and swaps solid white surfaces for glass. */
+:root{
+  --ink:#F3F7FF;          /* main text (light) */
+  --ink-2:#B9C8EC;
+  --ink-3:#8EA0CF;
+  --line:rgba(200,220,255,.18);
+  --bg:#040F33;
+  --glass:linear-gradient(160deg,rgba(255,255,255,.13),rgba(255,255,255,.03) 42%),rgba(14,34,92,.36);
+  --glass-hi:linear-gradient(160deg,rgba(255,255,255,.2),rgba(255,255,255,.05) 45%),rgba(30,60,150,.45);
+  --edge:rgba(200,220,255,.22);
+  --deep:#020A26;
+  color-scheme:dark;
+}
+html{background:#040F33}
+body{background:transparent;color:var(--ink)}
+body::before{background:#0A2470}
+#skybg{position:fixed;inset:0;z-index:-2;display:block;pointer-events:none}
+.vign{position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(120% 90% at 50% 45%,transparent 55%,rgba(2,8,26,.55) 100%)}
+h1,h2{text-shadow:0 4px 40px rgba(4,16,46,.55)}
+em.acc{font-family:var(--display);font-style:normal;font-weight:inherit;letter-spacing:inherit;background:linear-gradient(95deg,var(--sky),#E6F4FF 70%,#fff);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 22px color-mix(in srgb,var(--sky) 55%,transparent))}
+.eyebrow,.dark .eyebrow{color:var(--sky)}
+.eyebrow i{box-shadow:0 0 0 4px color-mix(in srgb,var(--sky) 25%,transparent),0 0 14px var(--sky)}
+.link{color:var(--sky)}
+.lead{color:var(--ink-2)}
+::selection{background:var(--sky);color:#04102E}
+
+/* glass surfaces */
+.card,.white .card,.bento .bx,.stk,.pstep,.white .pstep,.mist .pstep,.plan,.faq details,.white .faq details,.rel a,.val,.info div,.tabs,.fbar button,.tags span,.hstats>div,.checks,.lesson label,.lesson .prog,.stair,.cal .d,.spread,.devs button,.chips-pick span,.btn-o,.bento .svc a{
+  background:var(--glass);border-color:var(--edge);backdrop-filter:blur(16px) saturate(150%);-webkit-backdrop-filter:blur(16px) saturate(150%);box-shadow:0 1px 0 rgba(255,255,255,.14) inset,0 30px 60px -36px rgba(0,8,30,.8)}
+.card:hover,.white .card:hover,.rel a:hover,.bento .bx:hover{background:var(--glass-hi);border-color:color-mix(in srgb,var(--sky) 55%,transparent);box-shadow:0 0 0 1px color-mix(in srgb,var(--sky) 25%,transparent),0 40px 80px -36px color-mix(in srgb,var(--blue) 70%,transparent)}
+.sec.white{background:rgba(255,255,255,.025)}
+.sec.mist{background:color-mix(in srgb,var(--blue) 9%,transparent)}
+.sec{background:transparent}
+.hero{background:transparent}
+.hero::before{opacity:.35}
+.ph{background:linear-gradient(140deg,rgba(91,147,255,.25),rgba(14,34,92,.5))}
+.ph.noimg::after{color:rgba(255,255,255,.25)}
+
+/* header & menus */
+.hdr .bar{background:rgba(6,20,62,.5);border-color:var(--edge);box-shadow:0 10px 40px -18px rgba(0,0,0,.6)}
+.nav>a,.nav>.dd>button{color:var(--ink)}
+.nav>a:hover,.nav>.dd>button:hover{background:rgba(255,255,255,.1)}
+.nav>a.on,.nav>.dd.on>button{color:var(--sky)}
+.mega{background:rgba(8,24,72,.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-color:var(--edge)}
+.mega a:hover{background:rgba(255,255,255,.08);color:var(--sky)}
+.burger{background:rgba(255,255,255,.12)}
+.mnav{background:#061542}
+
+/* buttons */
+.btn-p::before{background:#fff}
+.btn-p:hover{color:var(--blue)}
+.btn-d{background:#fff;color:#0A1433}
+.btn-d:hover{background:var(--sky);color:#04102E}
+.btn-o{color:#fff}
+.btn-o:hover{border-color:var(--sky);color:var(--sky)}
+.fbar button{color:var(--ink-2)}
+.fbar button.on,.fbar button:hover{background:#fff;color:#0A1433;border-color:#fff}
+.tabs button{color:var(--ink-2)}
+.tabs button.on{background:#fff;color:#0A1433}
+.devs button{color:var(--ink-2)}
+.devs button.on{background:#fff;color:#0A1433;border-color:#fff}
+
+/* components */
+.ico{background:color-mix(in srgb,var(--sky) 16%,transparent);color:var(--sky)}
+.chips span{background:color-mix(in srgb,var(--sky) 14%,transparent);color:var(--sky)}
+.marq{background:transparent;border-color:var(--edge)}
+.marq .row span:nth-child(odd){-webkit-text-stroke-color:rgba(255,255,255,.7)}
+.marq .row span::after{background:var(--sky);box-shadow:0 0 18px var(--sky)}
+.mani .w{color:rgba(255,255,255,.16)}
+.mani .w.lit{color:#fff}
+.mani .w.acc.lit{color:var(--sky);text-shadow:0 0 30px color-mix(in srgb,var(--sky) 60%,transparent)}
+.pstep .n,.stk .big{-webkit-text-stroke-color:var(--sky)}
+.pstep::after{background:var(--sky)}
+.pbar i{background:linear-gradient(90deg,var(--blue),var(--sky))}
+.bento .lbl{color:var(--blue)}
+.sw-item b{color:rgba(255,255,255,.35)}
+.sw-item.on b{color:#fff}
+.sw-item svg{color:var(--sky)}
+.plan .meta span:nth-child(odd),.plan .per{color:var(--ink-3)}
+.faq summary i{background:rgba(255,255,255,.1)}
+.faq summary i::before,.faq summary i::after{background:var(--sky)}
+.faq details[open]{border-color:color-mix(in srgb,var(--sky) 45%,transparent)}
+.val:hover{background:var(--blue);border-color:transparent}
+.cform input,.cform select,.cform textarea{background:rgba(255,255,255,.06);border-color:var(--edge);color:#fff}
+.cform input:focus,.cform select:focus,.cform textarea:focus{background:rgba(255,255,255,.1);border-color:var(--sky)}
+.cform select option{color:#0A1433}
+.cform .msg{color:var(--sky)}
+.chips-pick input:checked+span{background:var(--blue);border-color:var(--blue);color:#fff}
+.hstats b{text-shadow:0 0 30px color-mix(in srgb,var(--sky) 45%,transparent)}
+.badge-spin text{fill:#fff}
+.ctab{background:linear-gradient(160deg,rgba(255,255,255,.18),rgba(255,255,255,.04) 45%),color-mix(in srgb,var(--blue) 70%,#0A1A4A);border:1px solid var(--edge);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.ftr{background:rgba(2,10,38,.55);border-top-color:var(--edge);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.ftr .big em.acc{color:transparent}
+.fcols h4{color:var(--sky)}
+.fcols a:hover{color:#fff}
+.partners img{border-color:var(--edge)}
+.short{border-color:rgba(255,255,255,.85)}
+.lesson label:has(input:checked){background:var(--glass-hi);border-color:color-mix(in srgb,var(--sky) 55%,transparent)}
+.lesson .prog b,.stair .n{color:var(--sky)}
+.stair:last-child{background:var(--blue);border-color:transparent}
+.stair:last-child::before{color:var(--sky);text-shadow:0 0 20px var(--sky)}
+.checks li.done{color:#fff}
+.cal .d .n{color:var(--ink-3)}
+.spread .r{background:color-mix(in srgb,var(--blue) 18%,transparent)}
+.spread .type{color:var(--sky)}
+
+/* dark plates that used --ink as a dark colour */
+.film,.code,.vf,.phone{background:var(--deep)}
+.clap::before{background:repeating-linear-gradient(-55deg,#020A26 0 18px,#fff 18px 36px);border-bottom-color:#020A26}
+.code .caret{background:var(--sky)}
+
+/* light objects floating on the sky keep a light palette */
+.mock,.menu-card,.paper,.nb,.construct,.phone .scr,.toastx,.float-chip,.clip,.org .nd:not(.core):not(.you),.ticket,.hcard,.ring3d figure,.swatches button span{
+  --ink:#0A1433;--ink-2:#4A5576;--ink-3:#8790AA;--line:rgba(10,20,51,.09);--bg:#F5F7FC;color:var(--ink)}
+.mock .btn-p:hover{color:#fff}
+.mock .btn-p::before{background:#0A1433}
+.ticket .cut::before,.ticket .cut::after{background:#0A2470}
+.mon .hb,.mon .log{background:#0A1433}
+.shop .cart{background:#F5F7FC}
+
+@media (max-width:900px){.hero .noise{display:none}}
