@@ -5,12 +5,12 @@
 'use strict';
 let THREE,RoomEnvironment,RoundedBoxGeometry;
 try{THREE=await import('three');({RoomEnvironment}=await import('three/addons/environments/RoomEnvironment.js'));({RoundedBoxGeometry}=await import('three/addons/geometries/RoundedBoxGeometry.js'))}
-catch(e){document.body.classList.add('no3d');console.warn('Không tải được three.js',e);return}
+catch(e){document.body.classList.add('x-no3d');console.warn('Không tải được three.js',e);return}
 
 const A=window.APP,ST=window.STORY,IC=window.ICONS||{};
-const canvas=document.getElementById('gl');
+const canvas=document.getElementById('xgl');
 let renderer;
-try{renderer=new THREE.WebGLRenderer({canvas,antialias:true,powerPreference:'high-performance'})}catch(e){document.body.classList.add('no3d');throw e}
+try{renderer=new THREE.WebGLRenderer({canvas,antialias:true,powerPreference:'high-performance'})}catch(e){document.body.classList.add('x-no3d');throw e}
 const DPR_CAP=Math.min(devicePixelRatio||1,1.6);let dpr=Math.min(DPR_CAP,1.35);
 renderer.setPixelRatio(dpr);renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.05;
 const scene=new THREE.Scene(),camera=new THREE.PerspectiveCamera(45,innerWidth/innerHeight,.1,200);
@@ -473,7 +473,7 @@ if(document.fonts&&document.fonts.ready)document.fonts.ready.then(()=>{redraws.f
 // ---------- vòng vẽ ----------
 let camY=0,T=0,prevY=0,lastPortrait=A.portrait,ft=0,fn=0,good=0;
 const ctxs=S.map(o=>({iw:[],lw:[]}));
-A.on3d=(dt)=>{T+=dt;if(A.portrait!==lastPortrait){lastPortrait=A.portrait;resize()}
+A.on3d=(dt)=>{T+=dt;if(A.visible===false)return;if(A.portrait!==lastPortrait){lastPortrait=A.portrait;resize()}
   const target=-A.pos*U;camY+=(target-camY)*Math.min(1,dt*14);const v=(camY-prevY)/Math.max(dt,1e-3);prevY=camY;
   camera.position.set(A.mx*.9,camY-A.my*.5,D+Math.min(2.2,Math.abs(v)*.1));camera.lookAt(A.mx*.25,camY,0);camera.rotation.z+=THREE.MathUtils.clamp(v*.0035,-.04,.04);
   paintBg(A.pos);dust.rotation.y=Math.sin(T*.05)*.05;dust.position.y=Math.sin(T*.2)*.3;bokeh.forEach(b=>b.material.opacity=.06+.1*(.5+.5*Math.sin(T*.5+b.userData.ph)));beams.forEach(b=>b.rotation.z+=Math.sin(T*.3+b.userData.ph)*.0008);
