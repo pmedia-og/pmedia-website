@@ -105,7 +105,7 @@ function resumeVoice(){const t=APP.t;for(let i=0;i<L.length;i++){if(t>=L[i].a&&t
 function W0(){return wrap.getBoundingClientRect().top+scrollY}
 function setScroll(){lastSet=Math.max(0,Math.round(W0()+(posOf(APP.t)+OFF)*APP.vh));scrollTo(0,lastSet)}
 let cur=-1,capIdx=-2,last=performance.now(),uiHidden=false,idle=0,smooth=APP.pos,target=APP.pos,capOn=true,prevT=0;
-function setScene(k){if(k===cur)return;cur=k;document.body.classList.toggle('x-at0',k===0);railB.forEach((b,i)=>b.classList.toggle('x-now',i===k));
+function setScene(k){if(k===cur)return;cur=k;document.body.classList.toggle('x-at0',k===0);railB.forEach((b,i)=>b.classList.toggle('x-now',i===k));secs.forEach((s,i)=>s.classList.toggle('x-act',i===k));
   // cảnh ở xa: cảnh đã qua hiện đủ, cảnh chưa tới ẩn để lần sau xuất hiện lại có hiệu ứng
   secs.forEach((s,i)=>{if(Math.abs(i-k)<=1)return;REV[i].forEach(o=>{const on=i<k;if(o.on!==on){o.on=on;o.e.classList.toggle('x-in',on)}});
     HL[i].forEach(o=>{const st=i<k?2:0;if(o.st!==st){o.st=st;o.e.classList.toggle('x-hl',false);o.e.classList.toggle('x-done',st===2)}})})}

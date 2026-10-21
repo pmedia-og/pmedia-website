@@ -7,8 +7,7 @@
 .x-no3d #xgl{display:none}
 #xstage{position:absolute;left:0;right:0;top:0;z-index:2;will-change:transform;backface-visibility:hidden}
 .x-wrap *,.x-ui *{box-sizing:border-box}
-.x-wrap h1,.x-wrap h2,.x-wrap h3,.x-wrap p{color:inherit}
-.x-wrap a{color:inherit}
+:where(.x-wrap) :where(h1,h2,h3,p,a){color:inherit}
 .x-past .x-ctrl,.x-past .x-rail,.x-past .x-cap{opacity:0!important;pointer-events:none!important}
 .hdr,.fab{transition:opacity .5s,transform .55s cubic-bezier(.2,.75,.1,1)}
 .x-hideui .hdr,.x-hideui .fab{opacity:0;pointer-events:none}
@@ -29,8 +28,8 @@
 [data-d]{translate:0 calc(var(--x-o,0) * var(--x-d,0) * var(--x-vh))}
 
 .x-eyebrow{align-self:flex-start;display:inline-block;font:700 clamp(11px,.95vw,15px) var(--x-display);letter-spacing:.18em;text-transform:uppercase;color:#fff;background:color-mix(in srgb,var(--x-acc) 34%,transparent);border:1px solid color-mix(in srgb,var(--x-sky) 45%,transparent);padding:8px 16px;border-radius:99px}
-h1,h2{margin:0;font-weight:900;letter-spacing:-.04em;line-height:1.05;text-wrap:balance;text-shadow:0 4px 30px rgba(4,16,46,.55)}
-h2{font-size:clamp(34px,4.5vw,74px);margin-top:20px}
+.x-wrap :is(h1,h2){margin:0;font-weight:900;letter-spacing:-.04em;line-height:1.05;text-wrap:balance}
+.x-wrap h2{font-size:clamp(34px,4.5vw,74px);margin-top:20px}
 .x-lead{font-size:clamp(16px,1.35vw,22px);line-height:1.55;color:var(--x-mute);max-width:36ch;margin:18px 0 0;text-shadow:0 2px 16px rgba(4,16,46,.8)}
 .x-w{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.14em;margin-bottom:-.14em}
 .x-w>span{display:inline-block;transform:translate3d(0,108%,0) rotate(4deg);transform-origin:0 100%;transition:transform 1s var(--x-ease);transition-delay:calc(var(--x-i)*50ms)}
@@ -64,7 +63,7 @@ svg.x-i{fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stro
 .x-back{font:600 13px var(--x-display);color:var(--x-mute);text-decoration:none;border-bottom:1px dashed var(--x-edge)}
 
 /* grid of cards */
-.x-t-grid h2,.x-t-stats h2,.x-t-pricing h2{max-width:min(15ch,56%)}
+.x-t-stats h2,.x-t-pricing h2{max-width:min(15ch,56%)}
 .x-cards{display:grid;grid-template-columns:repeat(var(--x-n,3),minmax(0,1fr));gap:clamp(12px,1.5vw,22px);margin-top:auto}
 .x-card{padding:clamp(16px,1.6vw,26px);display:flex;flex-direction:column;gap:10px}
 .x-card h3{font:800 clamp(16px,1.35vw,22px)/1.2 var(--x-display);margin:4px 0 0;letter-spacing:-.01em}
@@ -180,7 +179,7 @@ svg.x-i{fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stro
   .x-list{margin-top:16px;gap:8px}.x-li{padding:10px 14px;font-size:14px}
   .x-rail{display:none}.x-time{display:none}.x-svcname{display:none}
   .x-box{padding-block:clamp(84px,12vh,120px) clamp(150px,22vh,190px)}
-  h2{font-size:clamp(28px,8vw,44px);margin-top:14px}
+  .x-wrap h2{font-size:clamp(28px,8vw,44px);margin-top:14px}
   .x-lead{font-size:15px}
   .x-tipline{display:none}
   .x-glass{background:linear-gradient(160deg,rgba(255,255,255,.1),rgba(255,255,255,.02) 45%),rgba(12,26,76,.86)}
@@ -190,6 +189,61 @@ svg.x-i{fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stro
 }
 @media (prefers-reduced-motion:reduce){.x-w>span,.x-r{transition-duration:.2s!important}}
 @media (max-aspect-ratio:9/10),(max-width:760px){
-  .x-page:not(.x-past) .fab{transform:translateY(-78px)}
+  .x-page:not(.x-past) .fab{opacity:0;pointer-events:none}
   .x-page:not(.x-past) .hdr{transition:opacity .5s}
+}
+
+/* ---------- nâng cấp trình diễn ---------- */
+@property --x-a{syntax:'<angle>';inherits:false;initial-value:0deg}
+.x-glass{position:relative}
+.x-glass.x-hl::before{content:"";position:absolute;inset:-1.5px;border-radius:inherit;padding:1.5px;background:conic-gradient(from var(--x-a),transparent 0 55%,var(--x-sky) 70%,#fff 78%,var(--x-acc) 86%,transparent 95%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;animation:x-spin 2.6s linear infinite;pointer-events:none}
+.x-glass.x-hl::after{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(105deg,transparent 30%,rgba(255,255,255,.16) 48%,transparent 62%);background-size:250% 100%;animation:x-sheen 2.4s ease-in-out infinite;pointer-events:none}
+@keyframes x-spin{to{--x-a:360deg}}
+@keyframes x-sheen{0%{background-position:120% 0}100%{background-position:-60% 0}}
+.x-ico{width:clamp(44px,3.6vw,58px);height:clamp(44px,3.6vw,58px);border-radius:16px;position:relative;box-shadow:0 0 0 1px rgba(255,255,255,.25) inset,0 12px 30px -10px var(--x-acc)}
+.x-ico::after{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(160deg,rgba(255,255,255,.45),transparent 50%);pointer-events:none}
+.x-hl .x-ico{animation:x-pop .6s var(--x-ease)}
+@keyframes x-pop{0%{transform:scale(.8) rotate(-8deg)}60%{transform:scale(1.12) rotate(3deg)}100%{transform:none}}
+/* thẻ trong cột trái (bố cục chia đôi) */
+.x-split .x-cards{grid-template-columns:repeat(2,minmax(0,1fr));margin-top:26px;gap:12px}
+.x-split .x-cards[style*="--x-n:3"]{grid-template-columns:1fr}
+.x-split .x-card{display:grid;grid-template-columns:auto 1fr;column-gap:14px;align-items:center;padding:14px 16px}
+.x-split .x-card .x-ico{grid-row:span 2}
+.x-split .x-card h3{margin:0;font-size:clamp(15px,1.15vw,19px)}
+.x-split .x-card p{font-size:clamp(12.5px,.92vw,14.5px)}
+/* lớp trang trí vector */
+.x-deco{position:absolute;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.x-box{z-index:1}
+.x-num{position:absolute;right:3vw;bottom:-4vh;font:900 clamp(160px,24vw,380px)/1 var(--x-display);letter-spacing:-.06em;color:transparent;-webkit-text-stroke:1.5px rgba(255,255,255,.12);translate:0 calc(var(--x-o,0) * -.25 * var(--x-vh))}
+.x-t-split .x-num,.x-t-grid .x-num,.x-t-outro .x-num{right:auto;left:42%}
+.x-orb{position:absolute;width:min(70vh,760px);aspect-ratio:1;right:-6vw;top:50%;margin-top:calc(min(70vh,760px) / -2);translate:0 calc(var(--x-o,0) * .35 * var(--x-vh));opacity:.9}
+.x-t-hero .x-orb,.x-t-steps .x-orb{right:auto;left:50%;margin-left:calc(min(70vh,760px) / -2)}
+.x-orb circle{fill:none;stroke-linecap:round;transition:stroke-dashoffset 2.6s var(--x-ease)}
+.x-orb .o1{stroke:color-mix(in srgb,var(--x-sky) 55%,transparent);stroke-width:1.2;stroke-dasharray:1000;stroke-dashoffset:1000}
+.x-orb .o2{stroke:rgba(255,255,255,.22);stroke-width:.8;stroke-dasharray:4 10}
+.x-orb .o3{stroke:var(--x-acc);stroke-width:2.4;stroke-dasharray:120 900;stroke-dashoffset:1020;opacity:.9}
+.x-act .x-orb .o1{stroke-dashoffset:0}
+.x-act .x-orb .o3{stroke-dashoffset:0}
+.x-orb g{transform-origin:50% 50%;animation:x-rot 40s linear infinite;animation-play-state:paused}
+.x-orb g.r2{animation-duration:26s;animation-direction:reverse}
+.x-act .x-orb g{animation-play-state:running}
+@keyframes x-rot{to{transform:rotate(360deg)}}
+.x-tag{position:absolute;left:max(28px,4vw);bottom:calc(clamp(150px,21vh,200px) - 40px);font:600 11px var(--x-mono);letter-spacing:.2em;color:rgba(255,255,255,.4);display:flex;gap:10px;align-items:center}
+.x-tag::before{content:"";width:40px;height:1px;background:rgba(255,255,255,.35)}
+.x-t-hero .x-tag{display:none}
+/* nút: tương phản tốt hơn */
+.x-ghost{background:rgba(255,255,255,.14)!important;border:1px solid rgba(255,255,255,.38)!important;color:#fff!important;font-weight:700;transition:background .3s,transform .3s var(--x-ease)}
+.x-ghost:hover{background:rgba(255,255,255,.26)!important;transform:translateY(-2px)}
+.x-cta{color:#0A1A48!important}
+/* kết: chia đôi, chữ căn trái */
+.x-outro{align-items:stretch;text-align:left;justify-content:center;padding-top:clamp(104px,13.5vh,140px)}
+.x-outro .x-eyebrow{align-self:flex-start}
+.x-wrap .x-outro h2{font-size:clamp(40px,5vw,84px)}
+.x-outro .x-cta-row,.x-outro .x-more{justify-content:flex-start}
+@media (max-aspect-ratio:9/10),(max-width:760px){
+  .x-num{font-size:44vw;left:auto!important;right:-4vw}
+  .x-orb{width:110vw;margin-top:-55vw;right:-40vw}
+  .x-tag{display:none}
+.x-wrap .x-outro h2{font-size:clamp(34px,10vw,52px)}
+  .x-outro{text-align:center}.x-outro .x-eyebrow{align-self:center}.x-outro .x-cta-row,.x-outro .x-more{justify-content:center}
 }
