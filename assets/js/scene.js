@@ -161,7 +161,7 @@ services(g){
 contact(g){
   const N=1400,p=new Float32Array(N*3);for(let i=0;i<N;i++){const y=1-(i/(N-1))*2,r=Math.sqrt(1-y*y),th=i*2.39996;p.set([Math.cos(th)*r*2,y*2,Math.sin(th)*r*2],i*3)}
   const gg=new THREE.BufferGeometry();gg.setAttribute('position',new THREE.BufferAttribute(p,3));const globe=new THREE.Points(gg,new THREE.PointsMaterial({size:.06,map:dotTex,color:BLUE,transparent:true,depthWrite:false}));g.add(globe);
-  g.add(new THREE.Mesh(new THREE.SphereGeometry(1.94,48,32),flat(0xe8eefc,{transparent:true,opacity:.7})));
+  g.add(new THREE.Mesh(new THREE.SphereGeometry(1.94,48,32),flat(0x1b3d9a,{transparent:true,opacity:.55,emissive:0x0a2470,emissiveIntensity:.4})));
   const ll=(lat,lon,r=2.02)=>{const phi=(90-lat)*Math.PI/180,th=(lon+180)*Math.PI/180;return new THREE.Vector3(-r*Math.sin(phi)*Math.cos(th),r*Math.cos(phi),r*Math.sin(phi)*Math.sin(th))};
   [ll(10.8,106.68),ll(10.95,106.82)].forEach(v=>{const m=new THREE.Mesh(new THREE.SphereGeometry(.1,16,12),mat(0xffb547));m.position.copy(v);globe.add(m)});
   const lb=label('TP.HCM · Biên Hòa',{w:640,h:120,size:42,scale:.42});lb.position.set(0,2.55,0);g.add(lb);
